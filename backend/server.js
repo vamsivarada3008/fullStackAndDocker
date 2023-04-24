@@ -15,10 +15,7 @@ const studentRoute = require('./routes/student.route')
   
 // Connecting MongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db,{
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(dbConfig.db).then(() => {
   console.log('Database successfully connected!')
 },
   error => {
