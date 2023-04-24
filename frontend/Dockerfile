@@ -1,23 +1,26 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14-alpine
+# Base image
+FROM node:14.17.5-alpine3.14
 
-# Set the working directory to /frontend
+# Set the working directory
 WORKDIR /frontend
 
-# Copy the package.json and package-lock.json
+# Copy the package.json and package-lock.json files to the working directory
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the remaining frontend files
+# Copy the entire project to the working directory
 COPY . .
 
-# Build the app
+# Build the project
 RUN npm run build
 
-# Expose port 3000 to the Docker host
+# Set the environment variable for the production build
+ENV NODE_ENV=production
+
+# Expose the port on which the application will run
 EXPOSE 3000
 
-# Start the frontend server
+# Start the application
 CMD ["npm", "start"]
